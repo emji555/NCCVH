@@ -1,0 +1,45 @@
+ {% extends 'base.html' %} {% block title%}home page {% endblock%} {% block content%} {% if user.is_authenticated %}
+<h1>Patient List </h1>
+
+<strong class="number"><span>All Patient :</span>{{ pcount }}</strong>
+<br/>
+<form action="{% url 'search_results' %}" method="get">
+  <input name="q" class="form-control" type="text" placeholder="Search...">
+  <br/>
+  <button type = "submit" class ="btn btn-primary">Sreach</button>
+</form>
+<br/>
+<table class ="table">
+<thead>
+      <tr>
+        <th>Patient Name</th>
+        <th>National ID</th>
+        <th>Patient Center</th>
+        <th>Gender</th>
+        <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Createon</th>
+        <th > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Actions </th>
+      </tr>
+    </thead>
+
+    <tbody>
+ {% for Patient in patient_list %} {% if user.id == Patient.Center_ID.id %}
+
+      <tr>
+    
+      <td> {{Patient.Patient_Name}}</td>
+        <td><a href="{% url 'patient-detail' Patient.pk %}">{{Patient.National_ID}}</td>
+        <td>{{Patient.Center_ID}}</td>
+        <td>{{Patient.gender}}</td>
+        <td>{{Patient.created_on}}</td>
+         <td> <a type="button" class="btn btn-info btn-sm" href="{% url 'update_patient' Patient.pk %}">Update</a>
+         
+          
+        <a type="button" class="btn btn-danger btn-sm" href="{% url 'delete_patient' Patient.pk %}">Delete</a> </td>
+      
+      </tr>
+      {% endif %}{% endfor %}
+    </tbody>
+  </table>
+
+ {% else %}
+<strong>please login</strong> {% endif %} {% endblock%}

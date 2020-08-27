@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<style>
+
+</style>
+    <title>{% block title%}NCCVH{% endblock%}</title>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="{% url 'home' %}">NCCVH Home
+        <small> &nbsp;&nbsp;<strong> Welcome </strong> :{{user.username}}</small> </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+
+{% if user.is_authenticated %}
+
+   <li class="nav-item">
+     <a class="nav-link" href="{% url 'add_patient' %}" style = "color:white">Add Patient HCV</a>
+     </li>
+
+       <li class="nav-item dropdown">
+        <a style = "color:white" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Liver Fup
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="{% url 'LiverList' %}">Liver Fup List</a>
+          <a class="dropdown-item" href="{% url 'add_liverp' %}">add Liver Patient</a>
+
+
+    <li class="nav-item">
+         <a class="nav-link" href="{% url 'logout' %}" style = "color:#cccccc">Logout</a>
+       </li>
+
+</div>
+{% else %}
+  <li class="nav-item">
+                
+                </li>
+<li class="nav-item">
+                    <a class="nav-link" href="{% url 'login' %}">Login</a>
+                </li>
+
+
+{% endif%}
+
+
+
+            </ul>
+
+        </div>
+    </nav>
+
+    <div class="container">
+
+        {% block content%} {% endblock%}
+    </div>
+  {% if user.is_authenticated %}
+  <!-- start Pagenation -->
+       {% block pagination %}
+    {% if is_paginated %}
+    <div class ="container">
+        <div class="pagination">
+            <span class="page-links" >
+                {% if page_obj.has_previous %}
+                    <a class="btn btn-primary" href="{{ request.path }}?page={{ page_obj.previous_page_number }}">previous</a>
+                {% endif %}
+                <span class="page-current">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                </span>
+                {% if page_obj.has_next %}
+                    <a class="btn btn-primary" href="{{ request.path }}?page={{ page_obj.next_page_number }}">next</a>
+                {% endif %}
+            </span>
+        </div>
+        </div>
+    {% endif %}
+  {% endblock %}
+   <!--  end Pagenation -->
+    {% endif%}
+    <hr>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+   <footer style="background-color:#404040;">
+
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3" style = "color:white">© 2020 Copyright:
+    <a > (Ministry of Health and Population
+Egypt) NATIONAL COMMITTEE FOR CONTROL OF VIRAL HEPATITIS 
+CAIRO, EGYPT</a>
+<br/>
+ <!-- <strong style = "color:white"> By ©:Islam Elmasry</strong>-->
+  </div>
+  <!-- Copyright -->
+
+</footer>
+<!-- Footer -->
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+</body>
+
+</html>

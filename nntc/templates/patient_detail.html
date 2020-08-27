@@ -1,0 +1,751 @@
+{% extends 'base.html' %} {% block title%}Patient detail{% endblock%} {% block content%}
+
+<head>
+    <style>
+        table,
+        td,
+        th {
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        
+        th,
+        td {
+            padding: 15px;
+        }
+    </style>
+</head>
+{% if user.is_authenticated %} {% if user.id == patient.Center_ID.id %}
+
+<h1>Patient detail View</h1>
+<a class="btn btn-info" href="{% url 'update_patient' patient.pk %}">Edit</a> -
+<a class="btn btn-info" href="{% url 'delete_patient' patient.pk %}">Delete</a></h1>
+<br/>
+<hr>
+<P style="background-color:#efeff5;font-size: 20px;text-align:center; color: rgb(111, 179, 235);"><b>Patient information</b></P>
+<table class="table table-bordered">
+
+    <tbody>
+        <tr>
+            <th><strong>Patient  Name </strong>: </th>
+            <td> <strong>Center ID : </strong> </td>
+            <td><strong>Date Of Inrollment : </strong> </td>
+            <td><strong>National ID : </strong></td>
+            <td><strong>Gender : </strong></td>
+            <td><strong>Age : </strong></td>
+        </tr>
+
+    </tbody>
+    <tbody>
+        <tr>
+            <th>{{patient.Patient_Name}}</th>
+            <td>{{patient.Center_ID}}</td>
+            <td>{{patient.date}}</td>
+            <td>{{patient.National_ID}}</td>
+            <td>{{patient.gender}}</td>
+            <td>{{patient.Age}}</td>
+        </tr>
+
+    </tbody>
+</table>
+<table>
+    <tbody>
+        <tr>
+            <th><strong>Portal Number</strong</th>
+            <td><strong>Cohort</strong></td>
+                <td><strong>PCR Date</strong></td>
+                <td><strong>Physician Name</strong></td>
+                <td><strong>Year Of HCV Positivity</strong></td>
+                <td><strong>Circumstances Of Referral</strong></td>
+        </tr>
+
+    </tbody>
+
+
+    <tbody>
+        <tr>
+            <th>{{patient.Portal_number}}</th>
+            <td>
+                {{patient.Cohort}}</td>
+            <td>{{patient.PCR_Date}}</td>
+            <td>{{patient.PhysicianName}}</td>
+            <td>{{patient.year_of_HCV_positivity}}</td>
+            <td>{{patient.Circumstances_of_referral}}</td>
+        </tr>
+
+    </tbody>
+</table>
+<br/>
+<table>
+    <tbody>
+        <tr>
+            <th><strong>Address</strong</th>
+          <td><strong>District Town</strong></td>
+                <td><strong>Home_tel</strong></td>
+                <td><strong>Mobile_1</strong></td>
+                <td><strong>Mobile_2</strong></td>
+
+        </tr>
+
+    </tbody>
+
+    <tbody>
+        <tr>
+            <th>{{patient.address}}</th>
+            <td>
+                {{patient.District_Town}}</td>
+            <td>{{patient.Home_tel}}</td>
+            <td>{{patient.Mobile_1}}</td>
+            <td>{{patient.Mobile_2}}</td>
+
+        </tr>
+
+    </tbody>
+</table>
+
+<hr>
+<br/><br/>
+<P style="background-color:#efeff5;">Patient status</P>
+<table>
+
+    <tbody>
+        <tr>
+            <th><strong>Treatment Status</strong</th>
+        <td><strong></strong>Which kind of Treatment</td>
+                <td><strong>Which kind of Treatment 2</strong></td>
+                <td><strong>Other Kind of Treatment</strong></td>
+                <td><strong>Previous treatment last injection date</strong></td>
+
+        </tr>
+
+    </tbody>
+    <tbody>
+        <tr>
+            <th>{{patient.Treatment_Status}}</th>
+            <td>
+                {{patient.Which_kind_of_Treatment}}</td>
+            <td>{{patient.Which_kind_of_Treatment_2}}</td>
+            <td>{{patient.Other_Kind_of_Treatment}}</td>
+            <td>{{patient.Previous_treatment_last_injection_date}}</td>
+
+        </tr>
+
+    </tbody>
+</table>
+<hr>
+<br/>
+<br/>
+<P style="background-color:#efeff5;">Clinical Information</P>
+<table>
+    <tbody>
+        <tr>
+            <th><strong>Weight Kgm</strong</th>
+      <td><strong></strong>Height m</td>
+                <td><strong>BMI</strong></td>
+                <td><strong>Tobacco Consumption</strong></td>
+                <td><strong>Alcohol intake</strong></td>
+                <td><strong>Former_Or_Ongoing_IV_Drug_User</strong></td>
+        </tr>
+
+    </tbody>
+    <tbody>
+        <tr>
+            <th>{{patient.Weight_Kgm}}</th>
+            <td>
+                {{patient.Height_m}}</td>
+            <td>{{patient.BMI}}</td>
+            <td>{{patient.Tobacco_Consumption}}</td>
+            <td>{{patient.Alcohol_intake}}</td>
+            <td>{{patient.Former_Or_Ongoing_IV_Drug_User}}</td>
+        </tr>
+
+    </tbody>
+</table>
+<br/>
+<table>
+    <tbody>
+        <tr>
+            <th><strong>Blood Pressure Systolic mmHg</strong</th>
+    <td><strong>Blood Pressure Diastolic mmHg</strong></td>
+
+
+        </tr>
+
+    </tbody>
+    <tbody>
+        <tr>
+            <th>{{patient.Blood_Pressure_Systolic_mmHg}}</th>
+            <td>
+                {{patient.Blood_Pressure_Diastolic_mmHg}}</td>
+
+
+        </tr>
+
+    </tbody>
+</table>
+<hr>
+<br/>
+<br/>
+<P style="background-color:#efeff5;">Chronic Disease</P>
+<table>
+    <tbody>
+        <tr>
+            <td><strong>Hypertensions</strong></td>
+            <td><strong>Diabetes</strong></td>
+            <td><strong>DM Treatment</strong></td>
+            <th><strong>Known To Be Cirrhotic</strong</th>
+    <td><strong>Hepatic Encephalopathy</strong></td>
+                <td><strong>Spicial Situation</strong></td>
+                <td><strong>Spicial Situation Other</strong></td>
+                <td><strong>HCC</strong></td>
+                <td><strong>If proven HCC</strong></td>
+                <td><strong>if Treated Specify HCC</strong></td>
+        </tr>
+
+    </tbody>
+    <tbody>
+        <tr>
+            <th>{{patient.Known_to_be_cirrhotic}}</th>
+            <td>
+                {{patient.Hepatic_Encephalopathy}}</td>
+            <td>{{patient.Spicial_Situation}}</td>
+            <td>{{patient.Spicial_Situation_Other}}</td>
+            <td>{{patient.HCC}}</td>
+            <td>{{patient.If_proVen_HCC}}</td>
+            <td>{{patient.if_Treated_Specify_HCC}}</td>
+            <td>{{patient.hypertensions}}</td>
+            <td>{{patient.Diabetes}}</td>
+            <td>{{patient.DM_Treatment}}</td>
+        </tr>
+
+    </tbody>
+    <tbody>
+</table>
+<br/>
+<table>
+    <tr>
+        <th><strong> if Treated Specify HCC</strong></th>
+        <th><strong>Current intake of other medication</strong</th>
+    <td><strong>Drug Name 1</strong></td>
+            <td><strong>Start Date of Medication 1</strong></td>
+            <td><strong>Duration Month 1</strong></td>
+
+
+    </tr>
+    <tbody>
+        <tr>
+            <th>{{patient.if_Treated_Specify_HCC}}</th>
+            <td>
+                {{patient.Current_intake_of_other_medication}}</td>
+            <td>{{patient.Drug_Name_1}}</td>
+            <td>{{patient.Start_Date_of_Medication_1}}</td>
+            <td>{{patient.Duration_Month_1}}</td>
+
+        </tr>
+
+    </tbody>
+
+</table>
+<br/>
+<table>
+    <tr>
+        <th><strong>Drug Name 2</strong></th>
+        <td><strong>Start Date of Medication 2</strong></td>
+        <td><strong>Duration Month 2</strong></td>
+        <td><strong>Drug Name 3</strong></td>
+        <td><strong>Start Date of Medication 3</strong></td>
+        <td><strong>Duration Month 3</strong></td>
+    </tr>
+    <tbody>
+        <tr>
+            <th>{{patient.Drug_Name_2}}</th>
+            <td>
+                {{patient.Start_Date_of_Medication_2}}</td>
+            <td>{{patient.Duration_Month_2}}</td>
+            <td>{{patient.Drug_Name_3}}</td>
+            <td>{{patient.Start_Date_of_Medication_3}}</td>
+            <td>{{patient.Duration_Month_3}}</td>
+        </tr>
+
+    </tbody>
+
+</table>
+<br/>
+<table>
+    <tr>
+        <th><strong>Drug Name 4</strong></th>
+        <td><strong>Start Date of Medication 4</strong></td>
+        <td><strong>Duration Month 4</strong></td>
+
+    </tr>
+    <tbody>
+        <tr>
+            <th>{{patient.Drug_Name_4}}</th>
+            <td>
+                {{patient.Start_Date_of_Medication_4}}</td>
+            <td>{{patient.Duration_Month_4}}</td>
+
+
+    </tbody>
+
+</table>
+<hr>
+
+<br/>
+<br/>
+<P style="background-color:#efeff5;">Lab result</P>
+<table>
+    <tr>
+        <th><strong>HCV RNA</strong></th>
+        <td><strong>Quant</strong></td>
+        <td><strong>Limit OF Det IU ml</strong></td>
+        <td><strong>Pregnancy Test</strong></td>
+        <td><strong>ALT (IUL)</strong></td>
+        <td><strong>ALT (ULN)</strong></td>
+        <td><strong>ALT (Result)</strong></td>
+    </tr>
+    <tbody>
+        <tr>
+            <th>{{patient.HCV_RNA}}</th>
+            <td>
+                {{patient.Quant}}</td>
+            <td>{{patient.Limit_OF_Det_IU_ml}}</td>
+            <td>{{patient.Pregnancy_Test}}</td>
+            <td>{{patient.ALT_IU_L}}</td>
+            <td>{{patient.ALT_ULN}}</td>
+            <td>{{patient.ALT_Result}}</td>
+        </tr>
+
+    </tbody>
+
+</table>
+<br/>
+<table>
+    <tr>
+        <th><strong>AST (IU_L)</strong></th>
+        <td><strong>AST (ULN)</strong></td>
+        <td><strong>AST (Result)</strong></td>
+        <td><strong>ALP (IUL)</strong></td>
+        <td><strong>ALP (ULN)</strong></td>
+        <td><strong>AFP (IUL)</strong></td>
+        <td><strong>AFP (ULN)</strong></td>
+    </tr>
+    <tbody>
+        <tr>
+            <th>{{patient.AST_IU_L}}</th>
+            <td>
+                {{patient.AST_ULN}}</td>
+            <td>{{patient.AST_Result}}</td>
+            <td>{{patient.ALP_IU_L}}</td>
+            <td>{{patient.ALP_ULN}}</td>
+            <td>{{patient.AFP_IU_L}}</td>
+            <td>{{patient.AFP_ULN}}</td>
+        </tr>
+
+    </tbody>
+
+</table>
+<br/>
+<table>
+    <tr>
+        <th><strong>Total BILIRUBIN mgd</strong></th>
+        <td><strong>Indirect Bilirubin mgdL</strong></td>
+        <td><strong>GGT (IUL)</strong></td>
+        <td><strong>GGT (ULN)</strong></td>
+        <td><strong>Plateletsx10 3</strong></td>
+        <td><strong>WBCx10  3 mm 3</strong></td>
+    </tr>
+    <tbody>
+        <tr>
+            <th>{{patient.Total_BILIRUBIN_mg_d}}</th>
+            <td>
+                {{patient.Indirect_Bilirubin_mg_dL}}</td>
+            <td>{{patient.GGT_IU_L}}</td>
+            <td>{{patient.GGT_ULN}}</td>
+            <td>{{patient.Plateletsx10_3}}</td>
+            <td>{{patient.WBCx10_3_mm_3}}</td>
+        </tr>
+
+    </tbody>
+
+    <tbody>
+
+
+        <tr>
+            <th><strong>ANCx10 3 mm 3</strong></th>
+            <td><strong>Albumin g dL</strong></td>
+            <td><strong>Hb GL</strong></td>
+            <td><strong>INR</strong></td>
+            <td><strong>Creatine mg dL</strong></td>
+            <td><strong>Glucose mgdL</strong></td>
+        </tr>
+        <tbody>
+            <tr>
+                <th>{{patient.ANCx10_3_mm_3}}</th>
+                <td>
+                    {{patient.Albumin_g_dL}}</td>
+                <td>{{patient.Hb_G_L}}</td>
+                <td>{{patient.INR}}</td>
+                <td>{{patient.Creatine_mg_dL}}</td>
+                <td>{{patient.Glucose_mg_dL}}</td>
+            </tr>
+
+        </tbody>
+
+</table>
+<br/>
+<table>
+    <tr>
+        <th><strong>Triglyceride mgdl</strong></th>
+        <td><strong>LDL mgdl</strong></td>
+        <td><strong>HDL mgdl</strong></td>
+        <td><strong>TSH</strong></td>
+        <td><strong>PC</strong></td>
+        <td><strong>HbA1c</strong></td>
+    </tr>
+    <tbody>
+        <tr>
+            <th>{{patient.Triglyceride_mg_dl}}</th>
+            <td>
+                {{patient.LDL_mg_dl}}</td>
+            <td>{{patient.HDL_mg_dl}}</td>
+            <td>{{patient.TSH}}</td>
+            <td>{{patient.PC}}</td>
+            <td>{{patient.HbA1c}}</td>
+        </tr>
+
+    </tbody>
+
+</table>
+
+<table>
+    <tr>
+        <th><strong>ANA</strong></th>
+        <td><strong>titre</strong></td>
+        <td><strong>blood Sample Storage</strong></td>
+        <td><strong>Specify The ID Sample</strong></td>
+
+    </tr>
+    <tbody>
+        <tr>
+            <th>{{patient.ANA}}</th>
+            <td>
+                {{patient.titre}}</td>
+            <td>{{patient.blood_Sample_Storage}}</td>
+            <td>{{patient.Specify_The_ID_Sample}}</td>
+
+        </tr>
+
+    </tbody>
+
+</table>
+<hr>
+
+<br/>
+<br/>
+<P style="background-color:#efeff5;">Chronic Heptitis B</P>
+
+<table>
+    <tr>
+        <th><strong>HBs Ag</strong></th>
+        <td><strong>HBV DBA</strong></td>
+        <td><strong>HBV DNA Quant</strong></td>
+        <td><strong>ECG</strong></td>
+        <td><strong>Spicify ECG</strong></td>
+
+    </tr>
+    <tbody>
+        <tr>
+            <th>{{patient.HBs_Ag}}</th>
+            <td>
+                {{patient.HBV_DBA}}</td>
+            <td>{{patient.HBV_DNA_Quant}}</td>
+            <td>{{patient.ECG}}</td>
+            <td>{{patient.Spicify_ECG}}</td>
+
+        </tr>
+
+    </tbody>
+
+</table>
+<table>
+    <tr>
+        <th><strong>HIV</strong></th>
+        <td><strong>limit of detetion IUml</strong></td>
+        <td><strong>Echo</strong></td>
+        <td><strong>Spicify_Echo</strong></td>
+
+    </tr>
+    <tbody>
+        <tr>
+            <th>{{patient.HIV}}</th>
+            <td>
+                {{patient.limit_of_detetion_IU_ml}}</td>
+            <td>{{patient.Echo}}</td>
+            <td>{{patient.Spicify_Echo}}</td>
+
+        </tr>
+
+    </tbody>
+
+</table>
+<hr>
+<br/><br/>
+<P style="background-color:#efeff5;">fundus exam</P>
+
+<table>
+    <tr>
+        <th><strong>Foundus Exam</strong></th>
+        <td><strong>Foundus exam specify</strong></td>
+
+    </tr>
+    <tbody>
+        <tr>
+            <th>{{patient.Foundus_Exam}}</th>
+            <td>
+                {{patient.Foundus_exam_specify}}</td>
+
+        </tr>
+
+    </tbody>
+
+</table>
+<hr>
+<br/><br/>
+<P style="background-color:#efeff5;">Abdominal Ultrasound</P>
+<table>
+    <tr>
+        <th><strong>Date Ultrasound</strong></th>
+        <td><strong>Liver</strong></td>
+        <td><strong>PV</strong></td>
+        <td><strong>PV Dimeter mm</strong></td>
+        <td><strong>Other ultrasound</strong></td>
+        <td><strong>Ascites</strong></td>
+    </tr>
+    <tbody>
+        <tr>
+            <th>{{patient.Date_Ultrasound}}</th>
+            <td>
+                {{patient.Liver}}</td>
+            <td>{{patient.PV}}</td>
+            <td>{{patient.PV_Dimeter_mm}}</td>
+            <td>{{patient.Other_ultrasound}}</td>
+            <td>{{patient.Ascites}}</td>
+        </tr>
+
+    </tbody>
+
+</table>
+<br>
+<table>
+    <tr>
+        <th><strong>Ascites IF YES</strong></th>
+        <td><strong>Presence Of focal Lesions</strong></td>
+        <td><strong>If Presence Of focal Lesions yes number</strong></td>
+        <td><strong>Diameter Of Largest cm</strong></td>
+        <td><strong>sonographic Appearance Malignant</strong></td>
+        <td><strong>Other Comment Ultrasound</strong></td>
+    </tr>
+    <tbody>
+        <tr>
+            <th>{{patient.Ascites_IF_YES}}</th>
+            <td>
+                {{patient.Presence_Of_focal_Lesions}}</td>
+            <td>{{patient.If_Presence_Of_focal_Lesions_yes_number}}</td>
+            <td>{{patient.Diameter_Of_Largest_cm}}</td>
+            <td>{{patient.sonographic_Appearance_Malignant}}</td>
+            <td>{{patient.Other_Comment_Ultrasound}}</td>
+        </tr>
+
+    </tbody>
+
+</table>
+<hr>
+<br/><br/>
+<P style="background-color:#efeff5;">liver Biopsy</P>
+
+<table>
+    <tr>
+        <th><strong>Fibrosis Assessment</strong></th>
+        <td><strong>Liver_Biopsy_Date</strong></td>
+        <td><strong>Activity_Grade_A</strong></td>
+        <td><strong>Fibrosis_Stage_F</strong></td>
+        <td><strong>Steatosis</strong></td>
+
+    </tr>
+    <tbody>
+        <tr>
+            <th>{{patient.Fibrosis_Assessment}}</th>
+            <td>
+                {{patient.Liver_Biopsy_Date}}</td>
+            <td>{{patient.Activity_Grade_A}}</td>
+            <td>{{patient.Fibrosis_Stage_F}}</td>
+            <td>{{patient.Steatosis}}</td>
+
+        </tr>
+
+    </tbody>
+
+</table>
+<br>
+<table>
+    <tr>
+        <th><strong>Fibroscan date</strong></th>
+        <td><strong>Fibroscan</strong></td>
+        <td><strong>stiffness</strong></td>
+        <td><strong>Previous Treatment for schistosomiasis</strong></td>
+        <td><strong>Serology</strong></td>
+        <td><strong>titre Sch</strong></td>
+    </tr>
+    <tbody>
+        <tr>
+            <th>{{patient.Fibroscan_date}}</th>
+            <td>
+                {{patient.Fibroscan}}</td>
+            <td>{{patient.stiffness}}</td>
+            <td>{{patient.Previous_Treatment_for_schistosomiasis}}</td>
+            <td>{{patient.Serology}}</td>
+            <td>{{patient.titre_Sch}}</td>
+        </tr>
+
+    </tbody>
+
+</table>
+<hr>
+<br/>
+<br/>
+<P style="background-color:#efeff5;">Calculations</P>
+<table>
+    <tr>
+        <th><strong>Fib4 Calculation</strong></th>
+        <td><strong>Chid score Calculation</strong></td>
+        <td><strong>E CrCl Calculation</strong></td>
+        <td><strong>Varices</strong></td>
+        <td><strong>Upper Endoscopy</strong></td>
+        <td><strong>Others Endoscopy</strong></td>
+    </tr>
+    <tbody>
+        <tr>
+            <th>{{patient.Fib4_Calculation}}</th>
+            <td>
+                {{patient.Chid_score_Calculation}}</td>
+            <td>{{patient.E_CrCl_Calculation}}</td>
+            <td>{{patient.Varices}}</td>
+            <td>{{patient.Upper_Endoscopy}}</td>
+            <td>{{patient.Others_Endoscopy}}</td>
+        </tr>
+
+    </tbody>
+
+</table>
+<hr>
+<br/>
+<br/>
+<P style="background-color:#efeff5;">Decision</P>
+<p>Note :{{patient.Note}}</p>
+<table>
+    <tr>
+        <th><strong>Code List</strong></th>
+
+        <td><strong>Contract_Type</strong></td>
+        <td><strong>Duration</strong></td>
+        <td><strong>Contract Type</strong></td>
+        <td><strong>Final Decision</strong></td>
+        <td><strong>created on</strong></td>
+    </tr>
+    <tbody>
+        <tr>
+            <th>{{patient.Code_List}}</th>
+            <td>
+
+                <td>{{patient.Contract_Type}}</td>
+                <td>{{patient.Duration}}</td>
+                <td>{{patient.Final_Decision}}</td>
+                <td>{{patient.created_on}}</td>
+        </tr>
+
+    </tbody>
+
+</table>
+
+
+
+
+
+<br/>
+<hr>
+<!-------- Start Week 0 View ------>
+<h2>Follow up </h2>
+{% if not patient.w0s.all %} no week 0 for this patient Yet <a href="{% url 'add_w0' patient.pk %}">add one </a> {% else %} {% for w0 in patient.w0s.all %} W0 : {{ w0.date }}-{{ w0.patient }}--{{ w0}}---<a type ="button" class ="btn btn-primary btn-sm" href="{% url 'update_W0' w0.pk %}">Update</a>
+<a type="button" class="btn btn-danger btn-sm" href="#">Delete</a>{%endfor%} {% endif %}
+
+
+<br/>
+<br/>
+<hr>
+<!-------- Start Week 4 View ------>
+{% if not patient.w4s.all %} no week 4 for this patient Yet <a href="{% url 'add_w4' patient.pk %}">add one </a> {% else %} {% for w4 in patient.w4s.all %} W4 : {{ w4.date }}-{{ w4.patient }}--{{ w4}}----<a type ="button" class ="btn btn-primary btn-sm" href="{% url 'update_W4' w4.pk %}">Update</a>
+<a type="button" class="btn btn-danger btn-sm" href="#">Delete</a>{% endfor %} {% endif %}
+
+<br/>
+<br/>
+<hr>
+<!-------- Start Week 8 View ------>
+{% if not patient.w8s.all %} no week 8 for this patient Yet <a href="{% url 'add_w8' patient.pk %}">add one </a> {% else %} {% for w8 in patient.w8s.all %} W8 : {{ w8.date }}-{{ w8.patient }}--{{ w8}}----<a type ="button" class ="btn btn-primary btn-sm" href="{% url 'update_W8' w8.pk %}">Update</a>
+<a type="button" class="btn btn-danger btn-sm" href="#">Delete</a> {% endfor %} {% endif %}
+<br/>
+<br/>
+<hr>
+<!-------- Start Week 12 View ------>
+{% if not patient.w12s.all %} no week 12 for this patient Yet <a href="{% url 'add_w12' patient.pk %}">add one </a> {% else %} {% for w12 in patient.w12s.all %} W12 : {{ w12.date }}-{{ w12.patient }}--{{ w12}}----<a type ="button" class ="btn btn-primary btn-sm" href="{% url 'update_W12' w12.pk %}">Update</a>
+<a type="button" class="btn btn-danger btn-sm" href="#">Delete</a> {% endfor %} {% endif %}
+
+
+<br/>
+<br/>
+<hr>
+<!-------- Start Week 16 View ------>
+{% if not patient.w16s.all %} no week 16 for this patient Yet <a href="{% url 'add_w16' patient.pk %}">add one </a> {% else %} {% for w16 in patient.w16s.all %} W16 : {{ w16.date }}-{{ w16.patient }}--{{ w16}}----<a type ="button" class ="btn btn-primary btn-sm" href="{% url 'update_W16' w16.pk %}">Update</a>
+<a type="button" class="btn btn-danger btn-sm" href="#">Delete</a> {% endfor %} {% endif %}
+
+<br/>
+<br/>
+<hr>
+<!-------- Start Week 20 View ------>
+{% if not patient.w20s.all %} no week 20 for this patient Yet <a href="{% url 'add_w20' patient.pk %}">add one </a> {% else %} {% for w20 in patient.w20s.all %} W20 : {{ w20.date }}-{{ w20.patient }}--{{ w20}}----<a type ="button" class ="btn btn-primary btn-sm" href="{% url 'update_W20' w20.pk %}">Update</a>
+<a type="button" class="btn btn-danger btn-sm" href="#">Delete</a> {% endfor %} {% endif %}
+
+<br/>
+<br/>
+<hr>
+<!-------- Start Week 24 View ------>
+{% if not patient.w24s.all %} no week 24 for this patient Yet <a href="{% url 'add_w24' patient.pk %}">add one </a> {% else %} {% for w24 in patient.w24s.all %} W24 : {{ w24.date }}-{{ w24.patient }}--{{ w24}}----<a type ="button" class ="btn btn-primary btn-sm" href="{% url 'update_W24' w24.pk %}">Update</a>
+<a type="button" class="btn btn-danger btn-sm" href="#">Delete</a> {% endfor %} {% endif %}
+
+<br/>
+<br/>
+<hr>
+<!-------- Start Week 28 View ------>
+{% if not patient.w28s.all %} no week 28 for this patient Yet <a href="{% url 'add_w28' patient.pk %}">add one </a> {% else %} {% for w28 in patient.w28s.all %} W28 : {{ w28.date }}-{{ w28.patient }}--{{ w28}}----<a type ="button" class ="btn btn-primary btn-sm" href="{% url 'update_W28' w28.pk %}">Update</a>
+<a type="button" class="btn btn-danger btn-sm" href="#">Delete</a> {% endfor %} {% endif %}
+
+
+<br/>
+<br/>
+<hr>
+<!-------- Start Week 36 View ------>
+{% if not patient.w36s.all %} no week 36 for this patient Yet <a href="{% url 'add_w36' patient.pk %}" target="_blank">add one </a> {% else %} {% for w36 in patient.w36s.all %} W36 : {{ w36.date }}-{{ w36.patient }}--{{ w36}}
+----<a type ="button" class ="btn btn-primary btn-sm" href="{% url 'update_W36' w36.pk %}">Update</a>
+<a type="button" class="btn btn-danger btn-sm" href="#">Delete</a> {% endfor %} {% endif %}
+
+
+<br/>
+<br/>
+<hr> {% else %} you are not allow here !! {% endif %} {% else %}
+
+<strong>Please Login</strong> {% endif %} {% endblock %}

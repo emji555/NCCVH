@@ -1,0 +1,58 @@
+ {% extends 'base.html' %} {% block title%}home page {% endblock%} {% block content%} {% if user.is_authenticated %}
+<h1>physician :{{num_patient}}</h1>
+<br/>
+<form action="{% url 'search_results' %}" method="get">
+  <input name="q" class="form-control" type="text" placeholder="Search...">
+  <br/>
+  <button type = "submit" class ="btn btn-primary">Sreach</button>
+</form>
+<br/>
+<table class ="table">
+<thead>
+      <tr>
+        <th>physician Center</th>
+        <th>physician Name</th>
+       
+        <th > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Actions </th>
+      </tr>
+    </thead>
+
+    <tbody>
+ {% for phy in phy_list %} {% if user.id == phy.Phythion_Center.id %}
+
+      <tr>
+    
+      <td> {{phy.Phythion_Center}}</td>
+        <td><a href="#">{{phy.Phythion_Name}}</td>
+        
+         <td> <a type="button" class="btn btn-info btn-sm" href="#" >Update</a>
+         
+          
+        <a type="button" class="btn btn-danger btn-sm" href="#">Delete</a> </td>
+      
+      </tr>
+      {% endif %}{% endfor %}
+    </tbody>
+  </table>
+
+ {% else %}
+<strong>please login</strong><br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/> {% endif %} {% endblock%}

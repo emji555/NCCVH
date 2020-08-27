@@ -1,0 +1,94 @@
+{% extends 'base.html' %} {% block title%}Patient detail{% endblock%} {% block content%}
+
+<head>
+    <style>
+        table,
+        td,
+        th {
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        
+        th,
+        td {
+            padding: 15px;
+        }
+    </style>
+</head>
+{% if user.is_authenticated %} {% if user.id == inrollment.Center_ID.id %}
+
+<h1>Patient detail View</h1>
+<a class="btn btn-info" href="#">Edit</a> -
+<a class="btn btn-info" href="#">Delete</a></h1>
+<br/>
+<hr>
+<P style="background-color:#efeff5;font-size: 20px;text-align:center; color: rgb(111, 179, 235);"><b>Patient information</b></P>
+<table class="table table-bordered">
+
+    <tbody>
+        <tr>
+            <th><strong>Patient  Name </strong>: </th>
+            <td> <strong>Center ID : </strong> </td>
+            <td><strong>National ID : </strong></td>
+            <td><strong>Gender : </strong></td>
+            <td><strong>Age : </strong></td>
+            <td><strong>Comorbidities : </strong> </td>
+        </tr>
+
+    </tbody>
+    <tbody>
+        <tr>
+            <th>{{inrollment.patient_name}}</th>
+            <td>{{inrollment.Center_ID}}</td>
+            <td>{{inrollment.National_ID}}</td>
+            <td>{{inrollment.gender}}</td>
+            <td>{{inrollment.age}}</td>
+            <td>{{inrollment.Comorbidities}}</td>
+        </tr>
+
+    </tbody>
+</table>
+<table>
+    <tbody>
+        <tr>
+            <th><strong>Cause of Liver Cirrhosis</strong></th>
+            <td><strong>HCV Treatmen If not Pick Na</strong></td>
+                <td><strong>In case OF HCV OutCome</strong></td>
+                <td><strong>created on</strong></td>
+                
+        </tr>
+
+    </tbody>
+
+
+    <tbody>
+        <tr>
+            <th>{{inrollment.Cause_of_Liver_Cirrhosis}}</th>
+            <td>
+                {{inrollment.HCV_Treatmen_If_not_Pick_Na}}</td>
+            <td>{{inrollment.In_case_OF_HCV_OutCome}}</td>
+            <td>{{inrollment.created_on}}</td>
+            
+        </tr>
+
+    </tbody>
+</table>
+
+<!-------- Start Week 0 View ------>
+<h2>Follow up </h2>
+{% if not inrollment.visits.all %} no visits  for this patient Yet <a href="#">add one </a> {% else %} <p>{% for visit in inrollment.visits.all %} Visit info : <a class="text-info"> Visit number</a>: {{ visit.visit_num }}-<a class="text-info">-Created on </a>: {{visit.create_on}} --<a type ="button" class ="btn btn-primary btn-sm" href="#">Update</a>
+<a type="button" class="btn btn-danger btn-sm" href="#">Delete</a></p><hr>{%endfor%} {% endif %}
+
+
+
+<br/>
+<br/>
+<hr>
+<hr> {% else %} you are not allow here !! {% endif %} {% else %}
+
+<strong>Please Login</strong> {% endif %} {% endblock %}

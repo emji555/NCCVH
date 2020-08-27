@@ -1,0 +1,35 @@
+ {% extends 'base.html' %} {% block title%}home page {% endblock%} {% block content%} {% if user.is_authenticated %}
+<h1>Patient List </h1>
+
+<strong class="number"><span>All Patient :</span>{{ pcount }}</strong>
+<table class ="table">
+<thead>
+      <tr>
+        <th>Patient Name</th>
+        <th>National ID</th>
+        <th>Patient Center</th>
+        <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Createon</th>
+        <th > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Actions </th>
+      </tr>
+    </thead>
+
+    <tbody>
+ {% for inrollment in inrollment_list %} {% if user.id == inrollment.Center_ID.id %}
+      <tr>
+    
+      <td> {{inrollment.patient_name}}</td>
+        <td><a href="{% url 'inrollment-detail' inrollment.pk %}">{{inrollment.National_ID}}</td>
+        <td>{{inrollment.Center_ID}}</td>
+        <td>{{inrollment.created_on}}</td>
+         <td> <a type="button" class="btn btn-info btn-sm" href="#">Update</a>
+         
+          
+        <a type="button" class="btn btn-danger btn-sm" href="#">Delete</a> </td>
+      
+      </tr>
+      {% endif %}{% endfor %}
+    </tbody>
+  </table>
+
+ {% else %}
+<strong>please login</strong> {% endif %} {% endblock%}
